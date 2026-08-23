@@ -748,7 +748,7 @@
     }
   };
 
-  var target = new Date("2026-08-24T00:00:00");
+  var target = new Date(Date.now() + 5000); // TEMP: 5s test countdown — will be reverted to real date
   var stageCountdown = document.getElementById("stage-countdown");
   var stageReveal = document.getElementById("stage-reveal");
   var burst = document.getElementById("burst");
