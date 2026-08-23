@@ -1,0 +1,641 @@
+<title>For My Rani</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500;1,600&family=Parisienne&family=Manrope:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+<style>
+  :root {
+    --ground: #FDF3F6;
+    --ground-deep: #F6E0EA;
+    --panel: #FFFFFF;
+    --panel-line: #F1D9E2;
+    --ink: #3A2430;
+    --ink-soft: #7A5566;
+    --rose: #C6577A;
+    --rose-deep: #A63F60;
+    --gold: #B8874F;
+    --gold-soft: #E8C9A0;
+    --line: #EBC6D2;
+    --shadow: rgba(58, 36, 48, 0.14);
+    --font-display: 'Cormorant Garamond', 'Iowan Old Style', 'Palatino Linotype', 'Times New Roman', serif;
+    --font-script: 'Parisienne', 'Segoe Script', 'Brush Script MT', cursive;
+    --font-ui: 'Manrope', 'Segoe UI', system-ui, -apple-system, sans-serif;
+  }
+
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) {
+      --ground: #1C1219;
+      --ground-deep: #2A1A24;
+      --panel: #251720;
+      --panel-line: #40293350;
+      --ink: #F5E4EA;
+      --ink-soft: #D6AFC0;
+      --rose: #E893AE;
+      --rose-deep: #F2A9C0;
+      --gold: #D9AD6E;
+      --gold-soft: #C98F55;
+      --line: #4A2E3A;
+      --shadow: rgba(0, 0, 0, 0.45);
+    }
+  }
+  :root[data-theme="dark"] {
+    --ground: #1C1219;
+    --ground-deep: #2A1A24;
+    --panel: #251720;
+    --panel-line: #40293350;
+    --ink: #F5E4EA;
+    --ink-soft: #D6AFC0;
+    --rose: #E893AE;
+    --rose-deep: #F2A9C0;
+    --gold: #D9AD6E;
+    --gold-soft: #C98F55;
+    --line: #4A2E3A;
+    --shadow: rgba(0, 0, 0, 0.45);
+  }
+
+  * { box-sizing: border-box; }
+
+  body {
+    margin: 0;
+    min-height: 100vh;
+    background: radial-gradient(120% 90% at 50% 0%, var(--ground-deep) 0%, var(--ground) 55%);
+    color: var(--ink);
+    font-family: var(--font-ui);
+    overflow-x: hidden;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  a, button { font-family: inherit; }
+
+  button:focus-visible {
+    outline: 2px solid var(--rose);
+    outline-offset: 3px;
+  }
+
+  .stage {
+    min-height: 100vh;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    padding: 6vh 5vw 8vh;
+    position: relative;
+  }
+
+  .eyebrow {
+    font-family: var(--font-ui);
+    font-size: 0.78rem;
+    font-weight: 600;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    color: var(--rose-deep);
+    margin: 0 0 0.9rem;
+  }
+
+  .script-name {
+    font-family: var(--font-script);
+    font-weight: 400;
+    font-size: clamp(3.4rem, 12vw, 6.5rem);
+    color: var(--rose-deep);
+    margin: 0;
+    line-height: 1;
+    text-shadow: 0 2px 24px var(--shadow);
+  }
+
+  .tagline {
+    font-family: var(--font-display);
+    font-style: italic;
+    font-weight: 500;
+    font-size: clamp(1.15rem, 2.4vw, 1.5rem);
+    color: var(--ink-soft);
+    max-width: 34ch;
+    margin: 0.9rem 0 0;
+    text-wrap: balance;
+  }
+
+  /* ---------- filigree ornaments ---------- */
+  .filigree {
+    position: absolute;
+    width: clamp(70px, 9vw, 110px);
+    height: auto;
+    opacity: 0.45;
+    color: var(--gold);
+  }
+  .filigree svg { width: 100%; height: 100%; display: block; }
+  .corner-tl { top: 6%; left: 5%; transform: rotate(0deg); }
+  .corner-br { bottom: 6%; right: 5%; transform: rotate(180deg); }
+  @media (max-width: 560px) {
+    .filigree { width: 56px; opacity: 0.3; }
+  }
+
+  /* ---------- countdown ---------- */
+  .countdown {
+    display: flex;
+    align-items: baseline;
+    gap: clamp(0.6rem, 2vw, 1.2rem);
+    margin: 2.6rem 0 0.8rem;
+  }
+  .countdown .unit {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    min-width: 3.6em;
+  }
+  .countdown .unit span {
+    font-family: var(--font-ui);
+    font-variant-numeric: tabular-nums;
+    font-weight: 700;
+    font-size: clamp(2.2rem, 7vw, 3.4rem);
+    color: var(--ink);
+    line-height: 1;
+  }
+  .countdown .unit label {
+    margin-top: 0.5rem;
+    font-size: 0.66rem;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--ink-soft);
+  }
+  .countdown .colon {
+    font-size: clamp(1.6rem, 5vw, 2.4rem);
+    color: var(--gold);
+    transform: translateY(-0.55em);
+  }
+
+  .hint {
+    margin: 1.4rem 0 0;
+    font-size: 0.85rem;
+    color: var(--ink-soft);
+    letter-spacing: 0.02em;
+  }
+
+  /* ---------- ambient particles ---------- */
+  .particles { position: absolute; inset: 0; overflow: hidden; pointer-events: none; }
+  .particle {
+    position: absolute;
+    bottom: -5%;
+    font-size: 1rem;
+    color: var(--rose);
+    opacity: 0;
+    animation: drift 11s linear infinite;
+  }
+  .particle.gold { color: var(--gold-soft); font-size: 0.6rem; }
+  .particle:nth-child(1) { left: 8%;  animation-delay: 0s;   }
+  .particle:nth-child(2) { left: 22%; animation-delay: 2.2s; font-size: 0.75rem; }
+  .particle:nth-child(3) { left: 38%; animation-delay: 4.8s; }
+  .particle:nth-child(4) { left: 55%; animation-delay: 1.3s; font-size: 0.65rem; }
+  .particle:nth-child(5) { left: 68%; animation-delay: 6.1s; }
+  .particle:nth-child(6) { left: 82%; animation-delay: 3.4s; font-size: 0.8rem; }
+  .particle:nth-child(7) { left: 92%; animation-delay: 7.5s; font-size: 0.6rem; }
+
+  @keyframes drift {
+    0%   { transform: translateY(0) rotate(0deg); opacity: 0; }
+    10%  { opacity: 0.55; }
+    85%  { opacity: 0.35; }
+    100% { transform: translateY(-105vh) rotate(25deg); opacity: 0; }
+  }
+
+  /* ---------- reveal stage ---------- */
+  #stage-reveal {
+    background-image:
+      repeating-linear-gradient(135deg, var(--ground-deep) 0 2px, transparent 2px 34px);
+    background-blend-mode: normal;
+  }
+
+  .burst {
+    position: absolute;
+    top: 14%;
+    left: 50%;
+    width: 12px; height: 12px;
+    transform: translate(-50%, -50%);
+    pointer-events: none;
+  }
+  .burst::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    border-radius: 50%;
+    background: radial-gradient(circle, var(--gold-soft) 0%, transparent 70%);
+    opacity: 0;
+  }
+  .burst.active::before {
+    animation: bloom 1.4s ease-out forwards;
+  }
+  @keyframes bloom {
+    0%   { opacity: 0.9; transform: scale(0.2); }
+    100% { opacity: 0; transform: scale(40); }
+  }
+
+  .envelopes {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(210px, 1fr));
+    gap: 2.2rem 1.6rem;
+    max-width: 780px;
+    width: 100%;
+    margin-top: 3rem;
+  }
+
+  .envelope {
+    position: relative;
+    appearance: none;
+    border: 1px solid var(--panel-line);
+    background: var(--panel);
+    cursor: pointer;
+    padding: 0;
+    height: 168px;
+    border-radius: 3px;
+    box-shadow: 0 10px 26px -14px var(--shadow);
+    transform: rotate(var(--rot, 0deg));
+    transition: transform 0.35s ease, box-shadow 0.35s ease;
+  }
+  .envelope:nth-child(1) { --rot: -3.5deg; }
+  .envelope:nth-child(2) { --rot: 2.5deg; }
+  .envelope:nth-child(3) { --rot: -1.5deg; }
+  .envelope:nth-child(4) { --rot: 3.5deg; }
+  .envelope:hover, .envelope:focus-visible {
+    transform: rotate(0deg) translateY(-6px);
+    box-shadow: 0 20px 34px -16px var(--shadow);
+  }
+
+  .envelope .flap {
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: 62%;
+    background: linear-gradient(155deg, var(--ground-deep), var(--panel) 70%);
+    clip-path: polygon(0 0, 100% 0, 50% 92%);
+    border-bottom: 1px solid var(--panel-line);
+  }
+
+  .envelope .seal {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 46px; height: 46px;
+    border-radius: 50%;
+    transform: translate(-50%, -50%);
+    background: radial-gradient(circle at 35% 30%, var(--gold-soft), var(--gold) 70%);
+    color: var(--panel);
+    font-family: var(--font-script);
+    font-size: 1.5rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 4px 10px -3px var(--shadow), inset 0 -3px 5px rgba(0,0,0,0.18);
+  }
+
+  .envelope.opened .seal {
+    opacity: 0.55;
+    box-shadow: none;
+  }
+  .envelope.opened .seal::after {
+    content: "";
+  }
+
+  .envelope .label {
+    position: absolute;
+    bottom: 14px;
+    left: 0; right: 0;
+    font-family: var(--font-display);
+    font-style: italic;
+    font-size: 1rem;
+    color: var(--ink-soft);
+  }
+
+  .envelope .opened-tag {
+    position: absolute;
+    top: 8px;
+    right: 10px;
+    font-size: 0.62rem;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--gold);
+    opacity: 0;
+  }
+  .envelope.opened .opened-tag { opacity: 0.8; }
+
+  .footer-note {
+    margin-top: 3.2rem;
+    font-family: var(--font-script);
+    font-size: 1.6rem;
+    color: var(--rose-deep);
+  }
+
+  /* ---------- modal ---------- */
+  .modal-backdrop {
+    position: fixed;
+    inset: 0;
+    background: rgba(20, 10, 15, 0.55);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 6vh 5vw;
+    z-index: 20;
+  }
+  .modal-backdrop[hidden] { display: none; }
+
+  .letter-paper {
+    position: relative;
+    background: var(--panel);
+    max-width: 520px;
+    width: 100%;
+    max-height: 82vh;
+    overflow-y: auto;
+    padding: clamp(2rem, 5vw, 3.2rem);
+    border-radius: 2px;
+    box-shadow: 0 30px 60px -20px rgba(0,0,0,0.5);
+    border: 1px solid var(--panel-line);
+  }
+
+  .close-btn {
+    position: absolute;
+    top: 14px; right: 16px;
+    background: none;
+    border: none;
+    font-size: 1.4rem;
+    line-height: 1;
+    color: var(--ink-soft);
+    cursor: pointer;
+    padding: 6px;
+  }
+  .close-btn:hover { color: var(--rose-deep); }
+
+  .letter-title {
+    font-family: var(--font-ui);
+    font-size: 0.72rem;
+    font-weight: 700;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--gold);
+    margin: 0 0 1.2rem;
+  }
+
+  .letter-body {
+    font-family: var(--font-display);
+    font-style: italic;
+    font-size: clamp(1.05rem, 2vw, 1.2rem);
+    line-height: 1.75;
+    color: var(--ink);
+  }
+  .letter-body p { margin: 0 0 1rem; }
+  .letter-body p:last-child { margin-bottom: 0; }
+
+  .signature {
+    margin: 1.6rem 0 0;
+    text-align: right;
+    font-family: var(--font-script);
+    font-size: 1.7rem;
+    color: var(--rose-deep);
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .particle, .burst.active::before, .envelope { animation: none !important; transition: none !important; }
+  }
+</style>
+
+<main>
+  <section id="stage-countdown" class="stage">
+    <div class="filigree corner-tl" aria-hidden="true">
+      <svg viewBox="0 0 120 160" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round">
+        <path d="M60 12 C98 12 102 58 84 92 C70 118 42 128 46 100 C49 80 66 76 61 58 C57 43 40 43 35 58 C30 76 45 88 40 98"/>
+        <circle cx="60" cy="12" r="3" fill="currentColor" stroke="none"/>
+      </svg>
+    </div>
+    <div class="filigree corner-br" aria-hidden="true">
+      <svg viewBox="0 0 120 160" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round">
+        <path d="M60 12 C98 12 102 58 84 92 C70 118 42 128 46 100 C49 80 66 76 61 58 C57 43 40 43 35 58 C30 76 45 88 40 98"/>
+        <circle cx="60" cy="12" r="3" fill="currentColor" stroke="none"/>
+      </svg>
+    </div>
+
+    <div class="particles" aria-hidden="true">
+      <span class="particle">♥</span>
+      <span class="particle gold">✦</span>
+      <span class="particle">♥</span>
+      <span class="particle gold">✦</span>
+      <span class="particle">♥</span>
+      <span class="particle gold">✦</span>
+      <span class="particle">♥</span>
+    </div>
+
+    <p class="eyebrow">something is waiting for you</p>
+    <h1 class="script-name">Rani</h1>
+    <p class="tagline">queen, since the day I met you.</p>
+
+    <div class="countdown" role="timer" aria-live="off">
+      <div class="unit"><span id="cd-hours">00</span><label>hours</label></div>
+      <span class="colon">:</span>
+      <div class="unit"><span id="cd-minutes">00</span><label>minutes</label></div>
+      <span class="colon">:</span>
+      <div class="unit"><span id="cd-seconds">00</span><label>seconds</label></div>
+    </div>
+    <p class="hint">until midnight unlocks your birthday letters</p>
+  </section>
+
+  <section id="stage-reveal" class="stage" hidden>
+    <div class="burst" id="burst" aria-hidden="true"></div>
+    <p class="eyebrow">happy birthday</p>
+    <h1 class="script-name">Rani</h1>
+    <p class="tagline">four little envelopes. open them whenever you need them &mdash; tonight, or any night after.</p>
+
+    <div class="envelopes">
+      <button class="envelope" data-letter="love" aria-haspopup="dialog">
+        <span class="flap" aria-hidden="true"></span>
+        <span class="seal" aria-hidden="true">R</span>
+        <span class="opened-tag">opened</span>
+        <span class="label">Why I Love You</span>
+      </button>
+      <button class="envelope" data-letter="miss" aria-haspopup="dialog">
+        <span class="flap" aria-hidden="true"></span>
+        <span class="seal" aria-hidden="true">R</span>
+        <span class="opened-tag">opened</span>
+        <span class="label">Open When You Miss Me</span>
+      </button>
+      <button class="envelope" data-letter="future" aria-haspopup="dialog">
+        <span class="flap" aria-hidden="true"></span>
+        <span class="seal" aria-hidden="true">R</span>
+        <span class="opened-tag">opened</span>
+        <span class="label">Our Future, Together</span>
+      </button>
+      <button class="envelope" data-letter="justbecause" aria-haspopup="dialog">
+        <span class="flap" aria-hidden="true"></span>
+        <span class="seal" aria-hidden="true">R</span>
+        <span class="opened-tag">opened</span>
+        <span class="label">Just Because</span>
+      </button>
+    </div>
+
+    <p class="footer-note">yours, always</p>
+  </section>
+</main>
+
+<div class="modal-backdrop" id="modal" hidden>
+  <div class="letter-paper" role="dialog" aria-modal="true" aria-labelledby="letter-title">
+    <button class="close-btn" id="closeModal" aria-label="Close letter">&times;</button>
+    <p class="letter-title" id="letter-title"></p>
+    <div class="letter-body" id="letter-body"></div>
+    <p class="signature" id="letter-signature"></p>
+  </div>
+</div>
+
+<script>
+(function () {
+  var letters = {
+    love: {
+      title: "Why I Love You",
+      signature: "&mdash; always yours",
+      paragraphs: [
+        "Meri jaan,",
+        "People ask what I love about you and I never know where to start, so here's the short version: the way you laugh with your whole body. The way you fight for the people you love, no matter what. The way a room feels different, softer, safer, the second you walk into it.",
+        "You're patient with me on the days I don't deserve it, and honest with me on the days I need it most. You're not just my favorite person. You're the proof that I got lucky.",
+        "Happy birthday, my qalbi. I love you today the way I loved you yesterday, completely, and a little more than I can explain."
+      ]
+    },
+    miss: {
+      title: "Open When You Miss Me",
+      signature: "&mdash; yours, still and always",
+      paragraphs: [
+        "Hey babyyy,",
+        "If you're reading this, it means some distance, a bad day, a long week, a few hundred miles, is standing between us right now. So here's a reminder: it doesn't matter how far apart we are, you're still the first thing I think about in the morning and the last thing before I fall asleep.",
+        "Close your eyes for five seconds and picture me right there next to you, holding your hand the way I always do. That's not distance. That's just a pause.",
+        "I'm not far, cutuuu. I'm just a call away, and always coming back to you."
+      ]
+    },
+    future: {
+      title: "Our Future, Together",
+      signature: "&mdash; forever, your keed",
+      paragraphs: [
+        "My lil keeed,",
+        "Here's a promise, not a plan: wherever we end up, whichever city, whichever tiny apartment or someday house, I want mornings with you in it. I want to grow old enough that we forget which stories we've already told each other.",
+        "I want every birthday after this one, every ordinary Tuesday, every ridiculous argument about whose turn it is to order food.",
+        "You're not just someone I love right now. You're the someone I'm choosing, on purpose, for every year after this one. Here's to all of it, meri jaan."
+      ]
+    },
+    justbecause: {
+      title: "Just Because",
+      signature: "&mdash; your keed, obsessed as always",
+      paragraphs: [
+        "Cutuuu,",
+        "This one's not deep, it's just true: you make ordinary days feel like something worth showing up for. Also, and I need you to know I thought about this for a long time, I am formally promising you unlimited biryani for the rest of forever. Any restaurant, any time, zero judgment about the extra raita.",
+        "That's how much I love you.",
+        "Happy birthday, my queen. Yes, “Rani”, I know exactly what it means, and I've known since the day I met you."
+      ]
+    }
+  };
+
+  var target = new Date("2026-08-24T00:00:00");
+  var stageCountdown = document.getElementById("stage-countdown");
+  var stageReveal = document.getElementById("stage-reveal");
+  var burst = document.getElementById("burst");
+  var hoursEl = document.getElementById("cd-hours");
+  var minutesEl = document.getElementById("cd-minutes");
+  var secondsEl = document.getElementById("cd-seconds");
+  var timerId = null;
+
+  function pad(n) { return String(n).padStart(2, "0"); }
+
+  function renderCountdown(diff) {
+    var totalSeconds = Math.floor(diff / 1000);
+    var hours = Math.floor(totalSeconds / 3600);
+    var minutes = Math.floor((totalSeconds % 3600) / 60);
+    var seconds = totalSeconds % 60;
+    hoursEl.textContent = pad(hours);
+    minutesEl.textContent = pad(minutes);
+    secondsEl.textContent = pad(seconds);
+  }
+
+  function reveal() {
+    if (timerId) clearInterval(timerId);
+    stageCountdown.hidden = true;
+    stageReveal.hidden = false;
+    requestAnimationFrame(function () {
+      burst.classList.add("active");
+    });
+  }
+
+  function tick() {
+    var diff = target - new Date();
+    if (diff <= 0) {
+      reveal();
+      return;
+    }
+    renderCountdown(diff);
+  }
+
+  tick();
+  if (stageReveal.hidden) {
+    timerId = setInterval(tick, 1000);
+  }
+
+  // ---- envelopes / modal ----
+  var modal = document.getElementById("modal");
+  var letterTitle = document.getElementById("letter-title");
+  var letterBody = document.getElementById("letter-body");
+  var letterSignature = document.getElementById("letter-signature");
+  var closeBtn = document.getElementById("closeModal");
+  var lastOpenedButton = null;
+
+  function getOpened() {
+    try {
+      return JSON.parse(localStorage.getItem("rani-letters-opened") || "[]");
+    } catch (e) {
+      return [];
+    }
+  }
+
+  function markOpened(key) {
+    try {
+      var opened = getOpened();
+      if (opened.indexOf(key) === -1) {
+        opened.push(key);
+        localStorage.setItem("rani-letters-opened", JSON.stringify(opened));
+      }
+    } catch (e) {}
+  }
+
+  function applyOpenedState() {
+    var opened = getOpened();
+    document.querySelectorAll(".envelope").forEach(function (btn) {
+      if (opened.indexOf(btn.dataset.letter) !== -1) {
+        btn.classList.add("opened");
+      }
+    });
+  }
+  applyOpenedState();
+
+  function openLetter(key, triggerEl) {
+    var data = letters[key];
+    if (!data) return;
+    letterTitle.textContent = data.title;
+    letterBody.innerHTML = data.paragraphs.map(function (p) {
+      return "<p>" + p + "</p>";
+    }).join("");
+    letterSignature.innerHTML = data.signature;
+    modal.hidden = false;
+    lastOpenedButton = triggerEl;
+    triggerEl.classList.add("opened");
+    markOpened(key);
+    closeBtn.focus();
+  }
+
+  function closeModal() {
+    modal.hidden = true;
+    if (lastOpenedButton) lastOpenedButton.focus();
+  }
+
+  document.querySelectorAll(".envelope").forEach(function (btn) {
+    btn.addEventListener("click", function () {
+      openLetter(btn.dataset.letter, btn);
+    });
+  });
+
+  closeBtn.addEventListener("click", closeModal);
+  modal.addEventListener("click", function (e) {
+    if (e.target === modal) closeModal();
+  });
+  document.addEventListener("keydown", function (e) {
+    if (e.key === "Escape" && !modal.hidden) closeModal();
+  });
+})();
+</script>
